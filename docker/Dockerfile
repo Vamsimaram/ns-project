@@ -2,15 +2,12 @@ FROM node:20-alpine
 
 WORKDIR /usr/src/app
 
-# Copy package files from the app folder
+# Copy only package files first
 COPY app/package*.json ./
-
-# Install only production dependencies
 RUN npm install --only=production
 
-# Copy the rest of the app source code
+# Copy the rest of the app
 COPY app/. .
 
 EXPOSE 3000
-
 CMD ["node", "index.js"]
